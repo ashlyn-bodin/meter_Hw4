@@ -10,7 +10,7 @@ class ModelBuilder(DataPreprocessing):
     def __init__(self, *args, **kwargs):
         super(ModelBuilder, self).__init__(*args, **kwargs)
 
-    def ann(self, X_train, X_test, y_train, y_test, hidden_layer_sizes=(37,), learning_rate_init=0.1, max_iter=200):
+    def ann(self, X_train, X_test, y_train, y_test, hidden_layer_sizes, learning_rate_init, max_iter):
         #Create ANN model
         ANN_classifier = MLPClassifier(hidden_layer_sizes=hidden_layer_sizes, learning_rate_init=learning_rate_init, max_iter=max_iter)
 
@@ -19,7 +19,7 @@ class ModelBuilder(DataPreprocessing):
 
         #Test the model
         ANN_predicted = ANN_classifier.predict(X_test)
-
+        
         error = 0
         for i in range(len(y_test)):
             error += np.sum(ANN_predicted != y_test)
